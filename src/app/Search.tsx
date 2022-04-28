@@ -12,28 +12,37 @@ import {jsonVideosResult} from './youTubeApi'
 
 export default function Search() {
     const [videos, setVideos]:[any | undefined, any] = useState()
-    const [inputValue, setInputValue]:[string, any] = useState('')
+    const [inputValue, setInputValue]:[string, any] = useState('котики и собачки')
+    const [toggle,setToggle] = useState(false)
+    
+    const inputValueToUrl = inputValue.replace(/ /gim,'%20')
+    
 
     // const videoIds = videos?.items.map((item:IvideoItems) => item.id.videoId )
     // const videoTitle = videos?.items.map((item:IvideoItems) => item.snippet.title)
     // const videoDescription = videos?.items.map((item:IvideoItems) => item.snippet.description)
+    const getVideos = ()=>{
+        setToggle(!toggle)
+        console.log(toggle);
+        
+    }
 
-    // useEffect(() => {
-    //   axios.get('https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=3&q=the%20weekend&key=AIzaSyBJNM6bUpw6P3lhIWkUzrZmYekhbSO2o_8')
-    //   .then(res => {
-    //     const video:Ivideos = res.data
-    //     setVideos(video as Ivideos)
-    //     console.log(video)
-    //   })  
-    // })
+useEffect(() => {
+  axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=3&q=${inputValueToUrl}&key=AIzaSyBJNM6bUpw6P3lhIWkUzrZmYekhbSO2o_8`)
+  .then(res => {
+    const video:Ivideos = res.data
+    setVideos(video as Ivideos)
+  })  
+},[toggle])
 
-    // {{рабочая ссылка надо добавить !!ембед!!}}
-    // <iframe width="560" height="315" src="https://www.youtube.com/embed/3DrU3pFXSsY" frameBorder="0" allowFullScreen></iframe>
+    // const getVideos = async ()=>{
+    //     axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=3&q=${inputValueToUrl()}&key=AIzaSyBJNM6bUpw6P3lhIWkUzrZmYekhbSO2o_8`)
+    //       .then(res => {
+    //         const video:Ivideos = res.data
+    //         setVideos(video as Ivideos)
+    //       })
+    // }
 
-    // const filtredItems = () =>{
-//   const filtred= videos.filter((video:any) => video.title.toLowerCase().includes(inputValue.toLowerCase()))
-//    setVideos(filtred)
-// }
 
     return (
     <section className={cl.wrapper}>
@@ -51,9 +60,8 @@ export default function Search() {
                 onChange={e => setInputValue(e.target.value)}
                 />
 
-                <button onClick={()=> alert('hui')} className={cl.searchButton}>НАЙТИ</button>
+                <button onClick={()=> getVideos()} className={cl.searchButton}>НАЙТИ</button>
                 <button onClick={()=> alert('clicked +')} className={cl.addToFavorite}>+</button>
-
             </div>
 
 
@@ -75,34 +83,7 @@ export default function Search() {
          <div className={cl.iFrameYouTubeVideo}>
               <iframe src="https://www.youtube.com/embed/3DrU3pFXSsY" title='{video.id}' frameBorder="0" allowFullScreen></iframe>
           </div>
-          <div className={cl.iFrameYouTubeVideo}>
-              <iframe src="https://www.youtube.com/embed/3DrU3pFXSsY" title='{video.id}' frameBorder="0" allowFullScreen></iframe>
-          </div>
-          <div className={cl.iFrameYouTubeVideo}>
-              <iframe src="https://www.youtube.com/embed/3DrU3pFXSsY" title='{video.id}' frameBorder="0" allowFullScreen></iframe>
-          </div>
-          <div className={cl.iFrameYouTubeVideo}>
-              <iframe src="https://www.youtube.com/embed/3DrU3pFXSsY" title='{video.id}' frameBorder="0" allowFullScreen></iframe>
-          </div>
-          <div className={cl.iFrameYouTubeVideo}>
-              <iframe src="https://www.youtube.com/embed/3DrU3pFXSsY" title='{video.id}' frameBorder="0" allowFullScreen></iframe>
-          </div>
-         <div className={cl.iFrameYouTubeVideo}>
-              <iframe src="https://www.youtube.com/embed/3DrU3pFXSsY" title='{video.id}' frameBorder="0" allowFullScreen></iframe>
-          </div>
-          <div className={cl.iFrameYouTubeVideo}>
-              <iframe src="https://www.youtube.com/embed/3DrU3pFXSsY" title='{video.id}' frameBorder="0" allowFullScreen></iframe>
-          </div>
-          <div className={cl.iFrameYouTubeVideo}>
-              <iframe src="https://www.youtube.com/embed/3DrU3pFXSsY" title='{video.id}' frameBorder="0" allowFullScreen></iframe>
-          </div>
-          <div className={cl.iFrameYouTubeVideo}>
-              <iframe src="https://www.youtube.com/embed/3DrU3pFXSsY" title='{video.id}' frameBorder="0" allowFullScreen></iframe>
-          </div>
-          <div className={cl.iFrameYouTubeVideo}>
-              <iframe src="https://www.youtube.com/embed/3DrU3pFXSsY" title='{video.id}' frameBorder="0" allowFullScreen></iframe>
-          </div>
-      </div>
+
         */}
 
 {/*   const videoIds = videos.items.map((item:IvideoItems) => item.id.videoId ) */}
@@ -113,15 +94,19 @@ export default function Search() {
 
 
       <div className={cl.iFrameYouTubeVideoWrapper} >
-        { jsonVideosResult.items.map(item => 
-            <div key={item.id.videoId} className={cl.iFrameYouTubeVideo}>
+        {
+        !inputValue
+        ? videos?.items.map( (item:any) => 
+            <div key={item.id.videoId}  className={cl.iFrameYouTubeVideo}>
                 <iframe src={`https://www.youtube.com/embed/${item.id.videoId}`} title='{video.id}' frameBorder="0" allowFullScreen></iframe>
                 <p>{item.snippet.description}</p>
             </div>
-          )}
+          )
+        : <div style={{textAlign:'center'}}>Ничего не найдено</div>
+        }
       </div>
 
-        
+        {/*  src={`https://www.youtube.com/watch?v=${item.id.videoId}`} фулскрин */}
       </section>
   )  
 }
