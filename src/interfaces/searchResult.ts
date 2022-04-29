@@ -13,7 +13,8 @@ export interface Ivideos {
 }
 
 
-export interface IvideoItems{
+interface IvideoItems{
+      // map(arg0: (item: any) => JSX.Element): import("react").ReactNode
   
       kind:" youtube#searchResult"
       etag: String
