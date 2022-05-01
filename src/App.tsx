@@ -21,8 +21,7 @@ export default function App() {
               <Suspense fallback={<Loading/>}>
                   <Search/> 
               </Suspense>}/>
-
-
+              
               <Route path='/favorites' element={
               <Suspense fallback={<Loading/>}>
                   <Favorites/>

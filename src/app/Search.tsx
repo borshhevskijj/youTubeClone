@@ -11,35 +11,51 @@ import { Ivideos, IvideoItems} from '../interfaces/searchResult'
 // import { video } from './api/youTubeApi';
 
 export default function Search() {
+    const lastSearchResult = localStorage.getItem('name')
+
+    
     const [videos, setVideos] = useState<Ivideos | undefined>() // массив с видео 
-    const [inputValue, setInputValue]= useState <string | undefined> ('наруто ураганные хроники') // инпут
+    const [inputValue, setInputValue]= useState <string | undefined> (lastSearchResult??'как написать свой ютуб?') // инпут
     const [toggle,setToggle] = useState<boolean>(false) // костыль)) следит за нажатием кнопки поиска
     const [viev,setViev] = useState<boolean>(false) // для изменения списка с видео
     const inputValueToUrl = (inputValue as string).replace(/ /gim,'%20') // для url адреса убирает пробелы и заменяет их символом
     
-    const [maxResult,setMaxResult] = useState<Number>(8)
-    
-    const ref = useRef<any>(null)
 
-    // setInterval(()=>{
-    //   console.log(`${ref.current.scrollHeight} - высота контейнера`)
-    // console.log(`${window.scrollY} - мое местоположение`);
-    // },2000)
-    // clearInterval()
-    
+    const [maxResult,setMaxResult] = useState<number>(3)
+
+    // ---LOCALSTORAGE
+      if(localStorage.getItem('name') === ''){
+        localStorage.removeItem('name')
+      }
+    const setLastSearchRequest =()=>{
+        handToggle(setToggle,toggle)
+        if(localStorage.length === 1){  //Поменять когда появится еще работа с LS 
+          localStorage.clear()
+        } 
+        else if (localStorage.getItem('name') === ''){
+          localStorage.removeItem('name')
+        }
+        return localStorage.setItem('name',(inputValue as string))        
+    } 
+
+    // ---LOCALSTORAGE
+
+    // console.log(`${lastSearchResuly} - локалсторедж и ${inputValue}-инпутвалуе`);
+    // const ref = useRef<any>(null)
+    // const currentScrollHeight = ref.current.scrollHeight
     // console.log(`${ref.current.scrollHeight} - высота контейнера`)
-    // console.log(`${window.scrollHeight} - мое местоположение`);
+    // console.log(`${window.pageYOffset} - мое местоположение`);
 
     const handToggle = (setFn: React.Dispatch<React.SetStateAction<boolean>>, variable:boolean) =>{ // переключатель состояния
         setFn(!variable)
     }
     const videosToColumn =  'repeat(1,minmax(50px,1fr))'
     const videosToRow = 'repeat(3,minmax(100px,1fr))'
-    const number = 5
-    const addMoreVideos =()=> setMaxResult(number)
-    
-    //if scroll section === window.scrollY - 300 {...logic...}
-    
+    const addMoreVideos =()=> {
+      setMaxResult(maxResult + 9)
+      handToggle(setToggle,toggle)
+    }
+        
     useEffect(() => {
       axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=${maxResult}&q=${inputValueToUrl}&key=AIzaSyBJNM6bUpw6P3lhIWkUzrZmYekhbSO2o_8`)
       .then(res => {
@@ -50,15 +66,8 @@ export default function Search() {
 },[toggle]) //костыль))
 
 
-const currentHeight =()=>{
- if(ref.current.scrollHeight - ref.current.scrollTop === ref.current.clientHeight){
-   alert('вы внизу')
- }
- alert(`вы находитесь тут - ${ref.current.scrollHeight}`)
-}
-currentHeight()
     return (
-    <section ref={ref} className={cl.wrapper}>
+    <section  className={cl.wrapper}>
         <div className={cl.search}>
 
             <h1>Поиск видео</h1>
@@ -74,8 +83,8 @@ currentHeight()
                 onChange={e => setInputValue(e.target.value)}
                 />
 
-                <button onClick={()=> handToggle(setToggle,toggle)} className={cl.searchButton}>НАЙТИ</button>
-                <button onClick={()=> alert('clicked +')} className={cl.addToFavorite}>+</button>
+                <button onClick={()=> setLastSearchRequest() } className={cl.searchButton}>НАЙТИ</button>
+                <button onClick={()=> setMaxResult(maxResult + 4 )} className={cl.addToFavorite}>+</button>
             </div>
 
 
@@ -83,8 +92,7 @@ currentHeight()
         </div>
 
         <div className={cl.searchResult}>
-          <p>Видео по запросу <strong>"{inputValue}"</strong></p>
-          
+          <p> Видео по запросу <strong>"{inputValue}"</strong> <span>{videos?.pageInfo.totalResults}</span></p>
           <div className={cl.changeVievIcons}>
             <button onClick={() => handToggle(setViev,viev)} className={cl.columnVideo}> { viev ? '+' : '-'} </button>
           </div>
@@ -97,13 +105,20 @@ currentHeight()
         ? videos?.items.map( (item:IvideoItems) => 
             <div key={(item.id.videoId as string)}  className={cl.iFrameYouTubeVideo}>
                 <iframe src={`https://www.youtube.com/embed/${item.id.videoId}`} title='{video.id}' frameBorder="0" allowFullScreen></iframe>
-                <p>{item.snippet.title}</p>
+                {/* <p>{item.snippet.title}</p> */}
+                <p>{item.snippet.channelTitle}</p>
             </div>
           )
         : <div>Ничего не найдено</div>
         }
+        {/* <iframe src='https://www.youtube.com/watch?v=XXYlFuWEuKI' title='zxc' frameBorder="0"></iframe> */}
+        {/* <iframe src="https://www.youtube.com/results?search_query=%D0%BA%D0%BE%D1%82%D0%B8%D0%BA%D0%B8" title='f' frameBorder="2"></iframe> */}
+
       </div>
-      <button onClick={()=> addMoreVideos()}>Показать еще</button>
+      <div>
+      </div>
+
+      <button onClick={()=> addMoreVideos()}> Показать еще</button>
 
         {/*  src={`https://www.youtube.com/watch?v=${item.id.videoId}`} фулскрин */}
       </section>
