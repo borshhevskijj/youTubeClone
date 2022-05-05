@@ -13,76 +13,66 @@ import {addLastSearchRequest,addToFavorites} from '../store/SearchSlice'
 import useDebounce from './../customHooks/useDebounce';
 
 
+if(localStorage.getItem('lastSearchRequest') === ''){
+  localStorage.removeItem('lastSearchRequest')
+}
 export default function Search() {
     const dispatch = useDispatch(); 
-    const selector = useSelector( (state:any) => state.AddToSlice.AddToSlice);
-    
-    if(localStorage.getItem('lastSearchRequest') === ''){
-      localStorage.removeItem('lastSearchRequest')
-    }
- 
-// localStorage.clear()
-    
-    // localStorage.clear()
-    
-    const [videos, setVideos] = useState<Ivideos | undefined>() // массив с видео     
-    
-    const [toggle,setToggle] = useState<boolean>(false)
-    const [viev,setViev] = useState<boolean>(false) // для изменения списка с видео
-    const [inputValue, setInputValue]= useState <string | undefined> ('как написать свой ютуб?') // инпут
-    
-    const inputValueToUrl = (inputValue as string).replace(/ /gim,'%20') // для url адреса убирает пробелы и заменяет их символом
-    
-    const debouncedInput = useDebounce(inputValue,700)
-    const lastSearchResult =()=>{
-      // localStorage.clear()
+    // const selector = useSelector( (state:any) => state.AddToSlice.AddToSlice);
 
-      handToggle(setToggle,toggle)      
-      localStorage.setItem('lastSearchRequest',inputValue as string)
-    }
-    
-      // console.log(debouncedInput);
-      const handToggle= (setFn: React.Dispatch<React.SetStateAction<boolean>>, variable:boolean)=> { // переключатель состояния
-        setFn(!variable)
-      }
-
-    // dispatch(addLastSearchRequest(debouncedInput))
+    const lastSearchRequest = localStorage.getItem('lastSearchRequest')//получаем последний запрос
 
     const [maxResult,setMaxResult] = useState<number>(6)
+    const [videos, setVideos] = useState<Ivideos | undefined>() // массив с видео     
+    const [inputValue, setInputValue]= useState <string | undefined> (lastSearchRequest??'как написать свой ютуб?') // инпут
+    const debouncedInput = useDebounce(inputValue,700)
+    const inputValueToUrl = (inputValue as string).replace(/ /gim,'%20') // для url адреса убирает пробелы и заменяет их символом
 
-    // ---LOCALSTORAGE
-      
-    // const addLastSearchRequest =()=>{//-------------------------------------------------------------------------------------------------- 1
-    //     handToggle(setToggle,toggle)
-
-    //     if(localStorage.length === 1){  //Поменять когда появится еще работа с LS 
-    //       localStorage.clear()
-    //     } 
-    //     else if (localStorage.getItem('name') === ''){
-    //       localStorage.removeItem('name')
-    //     }
-    //     return localStorage.setItem('name',(inputValue as string))        
-    // } 
-    // ---LOCALSTORAGE
+    const [viev,setViev] = useState<boolean>(JSON.parse(window.localStorage.getItem('viev') as string) ||false) // для изменения списка с видео
+    const [toggle,setToggle] = useState<boolean>(JSON.parse(window.localStorage.getItem('toggle') as string) ||false)
+    
+    
+    const videosToColumn =  'repeat(1,minmax(50px,1fr))';
+    const videosToRow = 'repeat(3,minmax(100px,1fr))';
 
     
-
-    const videosToColumn =  'repeat(1,minmax(50px,1fr))'
-    const videosToRow = 'repeat(3,minmax(100px,1fr))'
-    
-    const addMoreVideos =()=> {
-      setMaxResult(maxResult + 6)
+    const lastSearchResult=()=>{
+      handToggle(setToggle,toggle)
+      // HToggle()      
+      localStorage.setItem('lastSearchRequest',inputValue as string) //устанавливаем последний  запрос
     }
-//----add to favorites
+    // const HToggle =()=> setToggle(!toggle)
+    
 
-// const addToFavorites = ()=>{ //---------------------------------------------------------------------------------------------------//4
-//   localStorage.setItem(`favorites${inputValue}`,(inputValue as string))
-// } 
+//  при нажатии на кнопку "Найти" сохраняет в LS значение флага(true|false)
+    useEffect(()=>{
+      setToggle(JSON.parse(localStorage.getItem('toggle') as string))
+    },[])
+    useEffect(()=>{
+      localStorage.setItem('toggle',JSON.stringify(toggle))
+    },[toggle])
+    console.log(`${toggle} - toggle `);
+    // 
 
-// localStorage.clear()
-//----add to favorites
+// при нажатии на кнопку смены вида сохраняет в LS значение флага(true|false)
+    useEffect(()=>{
+      setToggle(JSON.parse(localStorage.getItem('viev') as string))
+    },[])
+    useEffect(()=>{
+      localStorage.setItem('viev',JSON.stringify(viev))
+    },[viev])
+    console.log(`${viev} - viev `);
+// 
+    
+    const handToggle= (setFn: React.Dispatch<React.SetStateAction<boolean>>, variable:boolean)=> { // переключатель состояний
+        setFn(!variable)
+      }
+      
+      const addMoreVideos =()=> {
+        setMaxResult(maxResult + 6)
+      }
 
-    // dispatch(addLastSearchRequest(inputValue))
+        // dispatch(addLastSearchRequest(inputValue))
     useEffect(() => {
       axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=${maxResult}&q=${inputValueToUrl}&key=AIzaSyBJNM6bUpw6P3lhIWkUzrZmYekhbSO2o_8`)
       .then(res => {
@@ -90,7 +80,8 @@ export default function Search() {
         setVideos(video)
         console.log('обновляется');
       })  
-},[toggle,maxResult]) 
+},[toggle]) 
+
 return (
     <section  className={cl.wrapper}>
         <div className={cl.search}>
