@@ -8,15 +8,14 @@ export default function App() {
   const Search = React.lazy(()=> import('./app/Search'));
   const Favorites = React.lazy(()=> import('./app/Favorites'));
 
+//   192.168.0.100:port?3000
   return (
 
     <div>
       <NavBar/>
-
           <Routes>
-              
               <Route path='*' element ={<Loading/>}/> 
-
+              
               <Route path='/' element={
               <Suspense fallback={<Loading/>}>
                   <Search/> 
