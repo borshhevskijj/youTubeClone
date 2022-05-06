@@ -28,7 +28,7 @@ export default function Search() {
     const debouncedInput = useDebounce(inputValue,700)
     const inputValueToUrl = (inputValue as string).replace(/ /gim,'%20') // для url адреса убирает пробелы и заменяет их символом
 
-    const [viev,setViev] = useState<boolean>(JSON.parse(window.localStorage.getItem('viev') as string) ||false) // для изменения списка с видео
+    const [viev,setViev] = useState<boolean>(JSON.parse(window.localStorage.getItem('viev') as string) || false) // для изменения списка с видео
     const [toggle,setToggle] = useState<boolean>(JSON.parse(window.localStorage.getItem('toggle') as string) ||false)
     
     
@@ -48,10 +48,11 @@ export default function Search() {
     useEffect(()=>{
       setToggle(JSON.parse(localStorage.getItem('toggle') as string))
     },[])
+
     useEffect(()=>{
       localStorage.setItem('toggle',JSON.stringify(toggle))
     },[toggle])
-    console.log(`${toggle} - toggle `);
+    // console.log(`${toggle} - toggle `);
     // 
 
 // при нажатии на кнопку смены вида сохраняет в LS значение флага(true|false)
@@ -61,9 +62,9 @@ export default function Search() {
     useEffect(()=>{
       localStorage.setItem('viev',JSON.stringify(viev))
     },[viev])
-    console.log(`${viev} - viev `);
-// 
-    
+    // console.log(`${viev} - viev `);
+//
+
     const handToggle= (setFn: React.Dispatch<React.SetStateAction<boolean>>, variable:boolean)=> { // переключатель состояний
         setFn(!variable)
       }
@@ -80,7 +81,7 @@ export default function Search() {
         setVideos(video)
         console.log('обновляется');
       })  
-},[toggle]) 
+},[toggle,maxResult]) 
 
 return (
     <section  className={cl.wrapper}>
@@ -122,7 +123,8 @@ return (
                 {/* <p>{item.snippet.title}</p> */}
                 <p>{item.snippet.channelTitle}</p>
                 <button 
-                onClick={()=> dispatch(addToFavorites(`https://www.youtube.com/embed/${item.id.videoId}`))} className={cl.addToFavorite}>
+                onClick={()=> dispatch(addToFavorites(`https://www.youtube.com/embed/${item.id.videoId}`))} 
+                className={cl.addToFavorite}>
                 LIKE
                 </button>
             </div>
@@ -132,8 +134,6 @@ return (
         {/* <iframe src='https://www.youtube.com/watch?v=XXYlFuWEuKI' title='zxc' frameBorder="0"></iframe> */}
         {/* <iframe src="https://www.youtube.com/results?search_query=%D0%BA%D0%BE%D1%82%D0%B8%D0%BA%D0%B8" title='f' frameBorder="2"></iframe> */}
 
-      </div>
-      <div>
       </div>
       <button onClick={()=> addMoreVideos()}> Показать еще</button>
 
