@@ -1,4 +1,4 @@
-import React,{ useState, useEffect}  from 'react'
+import React,{ useState, useEffect,useMemo}  from 'react'
 import axios from "axios";
 // import  from 'react'
 import cl from '../styles/search.module.css'
@@ -57,8 +57,9 @@ export default function Search() {
 
 // при нажатии на кнопку смены вида сохраняет в LS значение флага(true|false)
     useEffect(()=>{
-      setToggle(JSON.parse(localStorage.getItem('viev') as string))
+      setViev(JSON.parse(localStorage.getItem('viev') as string))
     },[])
+
     useEffect(()=>{
       localStorage.setItem('viev',JSON.stringify(viev))
     },[viev])
@@ -75,13 +76,19 @@ export default function Search() {
 
         // dispatch(addLastSearchRequest(inputValue))
     useEffect(() => {
+
       axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=${maxResult}&q=${inputValueToUrl}&key=AIzaSyBJNM6bUpw6P3lhIWkUzrZmYekhbSO2o_8`)
       .then(res => {
         const video:Ivideos = res.data
+      // const videoMem = useMemo(() =>setVideos(video), [video]) 
         setVideos(video)
-        console.log('обновляется');
+        console.log('обновляется')
       })  
 },[toggle,maxResult]) 
+
+// extendableEvent.waitUntil(promise);
+
+  
 
 return (
     <section  className={cl.wrapper}>
@@ -118,14 +125,14 @@ return (
         {
          videos
         ? videos?.items.map( (item:IvideoItems) => 
-            <div key={(item.id.videoId as string)}  className={cl.iFrameYouTubeVideo}>
+            <div key={item.id.videoId}  className={cl.iFrameYouTubeVideo}>
                 <iframe src={`https://www.youtube.com/embed/${item.id.videoId}`} title='{video.id}' frameBorder="0" allowFullScreen></iframe>
                 {/* <p>{item.snippet.title}</p> */}
                 <p>{item.snippet.channelTitle}</p>
                 <button 
                 onClick={()=> dispatch(addToFavorites(`https://www.youtube.com/embed/${item.id.videoId}`))} 
-                className={cl.addToFavorite}>
-                LIKE
+                className={cl.addToFavorite}
+                >LIKE
                 </button>
             </div>
           )

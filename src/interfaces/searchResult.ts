@@ -1,15 +1,15 @@
 
 
 export interface Ivideos {
-  etag: String
+  etag: string
   items: IvideoItems
-  kind: String
-  nextPageToken: String
+  kind: string
+  nextPageToken: string
   pageInfo:{
-    totalResults:Number
-    resultsPerPage:Number
+    totalResults:number
+    resultsPerPage:number
   }
-  regionCode: String
+  regionCode: string
 }
 
 
@@ -18,36 +18,36 @@ export interface IvideoItems{
       // map(arg0: (item: any) => JSX.Element): import("react").ReactNode
   
       kind:" youtube#searchResult"
-      etag: String
+      etag: string
       id: {
-        kind: String
-        videoId: String
+        kind: string
+        videoId: string
       }
       snippet: {
-        publishedAt: String
-        channelId: String
-        title: String
-        description: String
+        publishedAt: string
+        channelId: string
+        title: string
+        description: string
         thumbnails: {
           default: {
-            url: String
-            width: Number
-            height: Number
+            url: string
+            width: number
+            height: number
           }
           medium: {
-            url: String
-            width: Number
-            height: Number
+            url: string
+            width: number
+            height: number
           }
           high: {
-            url: String
-            width: Number
-            height: Number
+            url: string
+            width: number
+            height: number
           }
         }
-        channelTitle: String
-        liveBroadcastContent: String
-        publishTime: String
+        channelTitle: string
+        liveBroadcastContent: string
+        publishTime: string
       }
   }
 

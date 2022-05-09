@@ -22,10 +22,7 @@ export default function Favorites() {
   }, [])
   
   const lsKeys = Object.keys(localStorage).map(item=> item)
-  
   // console.log(lsKeys);
-  
-  
   const lsValues = Object.values(localStorage).map(key => key)
 
   // console.log((favorites as string[]).map((fav:string) => fav))
@@ -43,32 +40,31 @@ export default function Favorites() {
 
 // и убрать из ЛС!
   const DeleteVideo =(favorite:string)=>{
-    // lsKeys.includes(favorite)
      setFavorites(favorites.filter(fav => !favorite.includes(fav)))
+     localStorage.removeItem(favorite)
   }
 
 //   console.log(lsKeys);
   
 // console.log(favorites);
-
-const clear =() =>  localStorage.clear()
-
+ 
+// localStorage.clear()
   return (
     <section className={cl.iFrameYouTubeVideo}>
-      <button style={{padding:'5px 30px'}} onClick={()=>clear()}>Удалить все видео</button>
       { 
-      favorites 
-          ?favorites.map((favorite:string) => 
-          <div
-          style={{marginBottom:'40px'}}
-          key={favorite}
-          className={cl.iFrameYouTubeVideo}>
-          <iframe src={favorite as string} title='any' frameBorder="0" allowFullScreen></iframe>
-          
-          {/* <button style={{padding:'5px 30px'}} onClick={()=>deleteVideo(favorite)}>Удалить</button> */}
-          <button style={{padding:'5px 30px'}} onClick={()=> DeleteVideo(favorite)}>Удалить</button>
+      // favorites !== []
+      localStorage.length !==3
+          ? favorites.map((favorite:string) => 
+              <div
+              style={{marginBottom:'40px'}}
+              key={favorite}
+              className={cl.iFrameYouTubeVideo}>
+              <iframe src={favorite as string} title='any' frameBorder="0" allowFullScreen></iframe>
+              
+              {/* <button style={{padding:'5px 30px'}} onClick={()=>deleteVideo(favorite)}>Удалить</button> */}
+              <button style={{padding:'5px 30px'}} onClick={()=> DeleteVideo(favorite)}>Удалить</button>
 
-          </div>)
+              </div>)
           : <div>В избранных нет видео</div>
         }
       </section>
