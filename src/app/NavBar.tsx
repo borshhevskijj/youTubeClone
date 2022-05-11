@@ -1,15 +1,11 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import { NavLink } from 'react-router-dom'
 // import {Route,Routes} from 'react-router-dom'
 import  cl from '../styles/navBar.module.css'
-
 // import * as css from '../styles/navBar.module.css'
 
 
-
-export default function NavBar() {
-
-  
+export default function NavBar() { 
   return (
 
     <nav className={cl.wrapper}>
@@ -21,7 +17,6 @@ export default function NavBar() {
                 <NavLink to='/favorites' className={cl.navLink}> Избранное </NavLink>
             </div>
               {/* <NavLink to='/' className={cl.navLink}> Выйти </NavLink>  */}
-              <span className={cl.navLink}> Выйти </span> 
 
         </div>
 
