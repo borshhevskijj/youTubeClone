@@ -23,8 +23,10 @@ const AddToSlice = createSlice({
         },
 
         addToFavorites(state, action){
-            localStorage.setItem(action.payload ,action.payload)
+            localStorage.setItem(action.payload ,action.payload) 
         },
+
+    
     }
 }) 
 export const { addLastSearchRequest, addToFavorites} = AddToSlice.actions;

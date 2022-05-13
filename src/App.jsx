@@ -6,7 +6,7 @@ import Loading from './app/UI/Loading';
 export default function App() {
 
   const Search = React.lazy(()=> import('./app/Search'));
-  const Favorites = React.lazy(()=> import('./app/Favorites'));
+  const Favorites = React.lazy(()=> import('./app/FavoritesPage/Favorites'));
 
 //   192.168.0.100:port?3000
   return (
