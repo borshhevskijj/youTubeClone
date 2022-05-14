@@ -5,13 +5,11 @@ import { Ivideos } from '../../interfaces/searchResult';
 import Videos from './Videos'
 // import { handToggle } from '../Search'
 import ChangeViev from '../UI/ChangeViev';
-// const videosToColumn ='repeat(1,minmax(50px,1fr))';
-// const videosToRow ='repeat(3,minmax(100px,1fr))';
 
 
 export default function SearchPage(props:any) {
     const [videos, setVideos] = useState<Ivideos | undefined>() // массив с видео 
-    const [maxResult,setMaxResult]=useState(5)  
+    const [maxResult,setMaxResult]=useState(6)  
     // const [viev,setViev] = useState<boolean>(JSON.parse(localStorage.getItem('searchViev') as string) || false) // для изменения списка с видео
     
     

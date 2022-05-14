@@ -16,10 +16,11 @@
 
 .input_field{
     width: 100%;
+    display: flex;
     position: relative;
     /* border:1px solid rgba(23, 23, 25, 0.2);
     border-radius: 5px; */
-    font-size: 30px;
+    font-size: 2em;
 }
 
 .searchResult{
@@ -52,7 +53,7 @@
     flex-direction: column;
 }
 .searchButton{
-    min-width: 20%;
+    min-width: 25%;
     padding: .87em 1.1em;
     border-top-right-radius:5px ;
     border-bottom-right-radius:5px;
@@ -62,7 +63,7 @@
     border: none;
 }
 .input_field input{
-    min-width: 80%;
+    min-width: 75%;
     padding: .8em 1.1em;
     /* border: none; */
     outline:none;
@@ -90,20 +91,23 @@
 
 .iFrameYouTubeVideoWrapper{
     display: grid;
-    grid-auto-rows: minmax(100px,350px);
-    grid-auto-columns: minmax(100px,350px);
+    /* grid-auto-rows: minmax(550px,250px); */
+
+    grid-auto-columns: minmax(100px,150px);
     /* margin-bottom: 100px; */
     text-align: left;
     gap: 100px 30px;
 }
 @media (max-width:635px) {
     .iFrameYouTubeVideoWrapper{
-        grid-template-columns:repeat(1,minmax(100px,1fr));
+        grid-template-columns:repeat(auto-fit,minmax(245px,1fr))
+        /* 'repeat(auto-fit,minmax(245px,1fr))' */
     }
     .changeVievIcons{
         display: none;
     }
 }
+
 .iFrameYouTubeVideo{
     position: relative;
     bottom: 0;

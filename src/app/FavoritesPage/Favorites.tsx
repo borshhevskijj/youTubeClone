@@ -9,6 +9,8 @@ import VideosFavoritesPage from './VideosFavoritesPage';
 
 // localStorage.clear()
 
+
+
 export default function Favorites() {
   const [favorites,setFavorites] = useState<string[]>([]) //лайкнутые видео
 

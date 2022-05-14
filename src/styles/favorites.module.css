@@ -68,23 +68,25 @@
 
 
 .iFrameYouTubeVideoWrapper{
+    
     display: grid;
-    grid-auto-rows: minmax(100px,350px);
+    
+    /* grid-auto-rows: minmax(100px,350px); */
+
     /* margin-bottom: 100px; */
     /* text-align: left; */
     /* align-items: start; */
     gap: 100px 30px;
     padding-top: 68px;
-    min-height: 93vh;
+    /* min-height: 93vh; */
 }
 @media (max-width:635px) {
-    .iFrameYouTubeVideoWrapper{
-        grid-template-columns:repeat(1,minmax(100px,1fr));
-    }
     .changeVievIcons{
         display: none;
     }
 }
+
+
 .iFrameYouTubeVideo{
     /* width: 40%; */
     /* display: inline-block; */
