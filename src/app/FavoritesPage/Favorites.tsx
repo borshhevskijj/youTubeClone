@@ -13,16 +13,7 @@ export default function Favorites() {
   const [favorites,setFavorites] = useState<string[]>([]) //лайкнутые видео
 
 
-    //-----
-  // const [viev,setViev] = useState<boolean>(JSON.parse(localStorage.getItem('favoritesViev') as string) || false) // для изменения списка с видео
-
-  // useEffect(()=>{
-  //   setViev(JSON.parse(localStorage.getItem('favoritesViev') as string))
-  // },[])
-  // useEffect(()=>{
-  //   localStorage.setItem('favoritesViev',JSON.stringify(viev))
-  // },[viev])
-  //-----
+ 
 
   useEffect(() => {
     const getFavorites = Object.keys(localStorage)
@@ -37,19 +28,16 @@ export default function Favorites() {
      localStorage.removeItem(favorite)
   }
   return (
+    
     <section className={cl.iFrameYouTubeVideoWrapper}>
-
-
-
       <ChangeViev
       viev={'favoritesViev'} 
+      className={cl.changeVievIcons}
       Component={ 
         <VideosFavoritesPage 
         DeleteVideo={DeleteVideo} 
         favorites={favorites}/>
       }/>
-
-      
       </section>
   )
 }

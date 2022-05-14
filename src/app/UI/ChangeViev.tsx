@@ -1,10 +1,14 @@
 import React,{useState,useEffect} from 'react'
 import cl from '../../styles/search.module.css'
 import { handToggle } from '../Search'
+// import content from './../svg/grid.svg'
+import List from '../svg/List'
+import Grid from '../svg/Grid'
 
-const videosToColumn ='repeat(1,minmax(50px,1fr))';
-const videosToRow ='repeat(3,minmax(100px,1fr))';
-
+const videosList ='repeat(1,minmax(auto-fit,1fr))';
+const videosGrid ='repeat(auto-fit ,minmax(200px,1fr))';
+	
+// grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
 export default function ChangeViev(props:any) {
     const [viev,setViev] = useState<boolean>(JSON.parse(localStorage.getItem(`${props.viev}`) as string) || false) // для изменения списка с видео
 
@@ -16,15 +20,18 @@ export default function ChangeViev(props:any) {
     },[viev])
 
   return (
-<>
-    <div className={cl.changeVievIcons}>
-            <button onClick={() => handToggle(setViev,viev)} className={cl.columnVideo}> { viev ? '+' : '-'} </button>
+
+  <div style={{textAlign:'right',paddingTop:'1em'}}>
+    <div className={props.className}>
+            <button onClick={() => handToggle(setViev,viev)}>
+              { viev ? <List/> :<Grid/>}
+            </button>
     </div>
 
-    <div style={{gridTemplateColumns:`${ viev ? videosToColumn : videosToRow}`}} className={cl.iFrameYouTubeVideoWrapper}>            
+    <div style={{gridTemplateColumns:`${ viev ? videosList : videosGrid}`}} className={cl.iFrameYouTubeVideoWrapper}>            
         {props.Component}
     </div>
-</>
+</div>
   )
 }
 

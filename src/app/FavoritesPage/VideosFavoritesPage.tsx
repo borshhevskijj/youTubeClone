@@ -4,7 +4,7 @@ import cl from '../../styles/favorites.module.css'
 
 export default function VideosFavoritesPage(props:any) {
   return (
-    <div>
+    <>
         {props.favorites
      ? props.favorites.map((favorite:string) => 
           <div
@@ -17,6 +17,6 @@ export default function VideosFavoritesPage(props:any) {
           )
       : <div>В избранных нет видео</div> // не работаeт}
         }   
-    </div>
+    </>
   )
 }

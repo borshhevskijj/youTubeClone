@@ -4,7 +4,6 @@ import axios from "axios";
 import { Ivideos } from '../../interfaces/searchResult';
 import Videos from './Videos'
 // import { handToggle } from '../Search'
-import { handToggle } from '../Search';
 import ChangeViev from '../UI/ChangeViev';
 // const videosToColumn ='repeat(1,minmax(50px,1fr))';
 // const videosToRow ='repeat(3,minmax(100px,1fr))';
@@ -34,25 +33,18 @@ export default function SearchPage(props:any) {
         })  
         .then(res => {console.log(`данные получены`)})
     },[props.toggle]) 
+    
 // localStorage.clear()
   return (
     <div className={cl.videosWrapper}>
       <div className={cl.searchResult}>
           <p> Видео по запросу <strong>`{props.debouncedInput}`</strong> <span>{videos?.pageInfo.totalResults}</span></p>
-          
-          {/* <div className={cl.changeVievIcons}>
-            <button onClick={() => handToggle(setViev,viev)} className={cl.columnVideo}> { viev ? '+' : '-'} </button>
-          </div> */}
               <ChangeViev 
               viev={'searchViev'}
+              className={cl.changeVievIcons}
               Component={<Videos videos={videos}/>
               }/>
-
-
       </div>
-      {/* <div style={{gridTemplateColumns:`${ viev ? videosToColumn : videosToRow}`}} className={cl.iFrameYouTubeVideoWrapper}>            
-            <Videos videos={videos}/>
-      </div> */}
     </div>
   )
 }

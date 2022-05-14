@@ -3,12 +3,10 @@ import NavBar from './app/NavBar';
 import {Route,Routes} from 'react-router-dom'
 import Loading from './app/UI/Loading';
 
+const Search = React.lazy(()=> import('./app/Search'));
+const Favorites = React.lazy(()=> import('./app/FavoritesPage/Favorites'));
+
 export default function App() {
-
-  const Search = React.lazy(()=> import('./app/Search'));
-  const Favorites = React.lazy(()=> import('./app/FavoritesPage/Favorites'));
-
-//   192.168.0.100:port?3000
   return (
 
     <div>

@@ -57,10 +57,8 @@ export default function Input(props:any) {
             </div>
         </div>
 
-            {/* <p> Видео по запросу <strong>`{debouncedInput}`</strong> <span>{props.totalResults}</span></p> */}
             <SearchPage toggle={toggle} inputValueToUrl={inputValueToUrl} debouncedInput={debouncedInput}/>
     </>
-              // </section>
 
 
 

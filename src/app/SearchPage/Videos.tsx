@@ -11,7 +11,8 @@ export default function Videos(props:any) {
             {
             props.videos
             ? props.videos.items.map((item:IvideoItems) => 
-                    <div key={item.id.videoId}  className={cl.iFrameYouTubeVideo}>
+                    <div key={item.id.videoId}  
+                    className={cl.iFrameYouTubeVideo}>
                         <iframe src={`https://www.youtube.com/embed/${item.id.videoId}`} title='{video.id}' frameBorder="0" allowFullScreen></iframe>
                         <p>{item.snippet.channelTitle}</p>
                         <button 
