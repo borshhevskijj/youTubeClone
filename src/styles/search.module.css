@@ -78,79 +78,68 @@
     border-right: none;
 }
 
-/* .addToFavorite{
-    padding: 5px 25px;
-    border: 1px solid black;
-    background-color: inherit;
-    transition: all .3s linear;
-}
-.addToFavorite:hover{
-    background-color: #1390E5;
-} */
-
-.fav {
-    display: inline-block;
-    padding: 0.4em 1.4em;
-    text-decoration: none;
-    color: #67c5ff;
-    border: none;
-    border-radius: 3px;
-    transition: .4s;
-    background-color: #1390E5;
-}
-.notFav {
-    display: inline-block;
-    padding: 0.4em 1.4em;
-    text-decoration: none;
-    color: #67c5ff;
-    border: none;
-    border-radius: 3px;
-    transition: .4s;
-    background-color: #10fc6f;
-}
-.fav:hover {
-    /* background: #67c5ff; */
-    color: white;
-    /* box-shadow: ; */
-}
-.alreadyFavorite{
-    color: #000000;
-    background-color: #10fc6f;
-}
-
 .iFrameYouTubeVideo iframe{
     width: 100%;
     height: 100%;
 }
-
-
 .iFrameYouTubeVideoWrapper{
     display: grid;
-    /* grid-auto-rows: minmax(550px,250px); */
-
     grid-auto-columns: minmax(100px,150px);
-    /* margin-bottom: 100px; */
     text-align: left;
     gap: 100px 30px;
 }
-@media (max-width:635px) {
-    .iFrameYouTubeVideoWrapper{
-        grid-template-columns:repeat(auto-fit,minmax(245px,1fr))
-        /* 'repeat(auto-fit,minmax(245px,1fr))' */
-    }
-    .changeVievIcons{
-        display: none;
-    }
-}
+
 
 .iFrameYouTubeVideo{
     position: relative;
     bottom: 0;
     left: 0;
 }
+
 .iFrameYouTubeVideo p{
     color: #1717194D;
     font-size: 17px;
+    margin-top: 10px;
 }
 
 
+.btn ,.fav {
+    margin-top: 10px;
+    align-items: center;
+    appearance: button;
+    background-color: #2F8F9D;  
+    border-radius: 5px;
+    border-style: none;
+    box-shadow: rgba(255, 255, 255, 0.26) 0 1px 2px inset;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+    line-height: 1.15;
+    padding: 10px 21px;
+    text-align: center;
+    text-transform: none;
+    transition: color .2s ease-in-out,background .2s ease-in-out,opacity .2s ease-in-out,box-shadow .2s ease-in-out;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  
+  .fav.btn {
+      background-color: #2155CD;
+    }
+    .fav.btn:hover {
+      background-color:#1390E5;  
+    }
+
+    @media (max-width:650px) {
+        .iFrameYouTubeVideoWrapper{    
+                grid-template-columns: repeat(auto-fit, minmax(245px, 1fr))!important;
+                grid-auto-rows: minmax(250px, 250px)!important;
+                }
+        .changeVievIcons{
+            display: none;
+        }
+    }

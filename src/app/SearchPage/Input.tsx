@@ -1,7 +1,5 @@
 import React,{ useState, useEffect}  from 'react'
-// import useDebounce from '../../customHooks/useDebounce';
 import useDebounce from '../../customHooks/useDebounce';
-// import cl from '../styles/search.module.css'
 import cl from '../../styles/search.module.css'
 import { handToggle } from '../Search';
 import SearchPage from './SearchPage';
@@ -45,7 +43,6 @@ export default function Input(props:any) {
                 <button onClick={()=> lastSearchResult() } className={cl.searchButton}>НАЙТИ</button>
             </div>
         </div>
-
             <SearchPage toggle={toggle} inputValueToUrl={inputValueToUrl} debouncedInput={debouncedInput}/>
     </>
 

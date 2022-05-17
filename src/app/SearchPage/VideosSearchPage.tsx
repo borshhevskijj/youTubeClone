@@ -26,7 +26,7 @@ import { handToggle } from '../Search'
 //     backgroundColor: '#10fc6f',
 // }
 
-export default function Videos(props:any) {
+export default function VideosSearchPage(props:any) {
 const dispatch = useDispatch();
 const [likedVideo,setLikedVideo]= useState<string[]>([]) 
 const [toggle,setToggle]= useState(false)
@@ -43,6 +43,8 @@ const [toggle,setToggle]= useState(false)
 
   return (
         <>
+        {/* <button className={cl.fav}>fav</button>
+        <button className={cl.notFav}>notFav</button> */}
             {
             props.videos
             ? props.videos.items.map((item:IvideoItems) => 
@@ -52,24 +54,29 @@ const [toggle,setToggle]= useState(false)
                         <p>{item.snippet.channelTitle}</p>
 
                         <button 
+                        // style={{marginTop:'15px'}}
                         onClick={
                             ()=> dispatch(addToFavorites(`https://www.youtube.com/embed/${item.id.videoId}`))
                             && handToggle(setToggle,toggle)
                         } 
                         className={
                         likedVideo?.includes(item.id.videoId)
-                        ? cl.notFav
-                        : cl.fav
+                        ? cl.btn 
+                        : cl.fav + ' ' + cl.btn
                         }
-                        > { likedVideo?.includes(item.id.videoId)
-                            ? 'В избранное'
-                            : 'Уже в избранном'
+                        > {
+                            likedVideo?.includes(item.id.videoId)
+                            ? 'Уже в избранном'
+                            : 'В избранное'
                             }
                         </button>
                     </div>
                 )
                 : <div>Ничего не найдено</div> // не работает
             }
+
+        
+
         </>
     )
 }

@@ -2,7 +2,8 @@ import React,{useEffect,useState} from 'react'
 import cl from '../../styles/search.module.css'
 import axios from "axios";
 import { Ivideos } from '../../interfaces/searchResult';
-import Videos from './Videos'
+
+import VideosSearchPage from './VideosSearchPage';
 // import { handToggle } from '../Search'
 import ChangeViev from '../UI/ChangeViev';
 
@@ -40,7 +41,7 @@ export default function SearchPage(props:any) {
               <ChangeViev 
               viev={'searchViev'}
               className={cl.changeVievIcons}
-              Component={<Videos videos={videos}/>
+              Component={<VideosSearchPage videos={videos}/>
               }/>
       </div>
     </div>
