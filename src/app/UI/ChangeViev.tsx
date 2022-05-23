@@ -1,17 +1,10 @@
 import React,{useState,useEffect} from 'react'
-import cl from '../../styles/search.module.css'
+// import cl from 'C:/you-tube-react-redux-ts/src/styles/navBar.module.scss'
+import  cl from '../../styles/favorites.module.scss'
 import { handToggle } from '../Search'
 // import content from './../svg/grid.svg'
 import List from '../svg/List'
 import Grid from '../svg/Grid'
-
-// const videosList ='repeat(1,minmax(auto-fit,1fr))';
-// const videosList ='repeat(1,minmax(auto-fit,1fr))';
-// const videosList ='repeat(1,minmax(auto-fit,1fr))';
-// const videosGrid ='repeat(3,minmax(100px,1fr))';
-
-
-
 
 const [videosListCol,videosGridCol] = ['repeat(1,minmax(300px,1fr))' , 'repeat(auto-fit,minmax(245px,1fr))'] //ширину
 const [videosListRow,videosGridRow] = ['minmax(550px,250px)' , 'minmax(250px,250px)'] //высоту
@@ -34,13 +27,14 @@ export default function ChangeViev(props:any) {
   <div style={{textAlign:'right',paddingTop:'1em'}}>
     <div className={props.className}>
             <button onClick={() => handToggle(setViev,viev)}>
-              { viev ? <List/> :<Grid/>}
+              { viev ? <List/> : <Grid/>}
             </button>
     </div>
 
     <div 
     className = {cl.iFrameYouTubeVideoWrapper}
     style={{
+    textAlign:'left',
     gridTemplateColumns: `${ viev ? videosListCol : videosGridCol}`,
     gridAutoRows: `${viev ? videosListRow : videosGridRow}`
     }}

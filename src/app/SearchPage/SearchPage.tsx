@@ -1,39 +1,59 @@
-import React,{useEffect,useState} from 'react'
-import cl from '../../styles/search.module.css'
+
+import React,{ useEffect,useState,useCallback} from 'react'
+import cl from '../../styles/search.module.scss'
 import axios from "axios";
 import { Ivideos } from '../../interfaces/searchResult';
-
 import VideosSearchPage from './VideosSearchPage';
-// import { handToggle } from '../Search'
 import ChangeViev from '../UI/ChangeViev';
 
+// const axiosGetVideos= async (inputValue='') => {
+//    axios.get
+//   (`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${inputValue}&key=AIzaSyBJNM6bUpw6P3lhIWkUzrZmYekhbSO2o_8`)
+// }
+//   useEffect(() => {
+//       axiosGetVideos(props.inputValueToUrl || '')
+//         .then((res:any) => {
+//           const video:Ivideos =  res.data || [];
+//           setVideos(video)
+//           console.log('обновляется')
+//         })  
+//     },[props.toggle]) 
 
-export default function SearchPage(props:any) {
+ const SearchPage = (props:any) => {
     const [videos, setVideos] = useState<Ivideos | undefined>() // массив с видео 
-    const [maxResult,setMaxResult]=useState(6)  
-    // const [viev,setViev] = useState<boolean>(JSON.parse(localStorage.getItem('searchViev') as string) || false) // для изменения списка с видео
-    
-    
 
-    // useEffect(()=>{
-    //   setViev(JSON.parse(localStorage.getItem('searchViev') as string))
-    // },[])
-    // useEffect(()=>{
-    //   localStorage.setItem('searchViev',JSON.stringify(viev))
-    // },[viev])
-
+    // const [isLoaded,setIsLoaded]= useState(false) это состояние в другом модуле
+    // onClick(()=> setIsLoaded(true) ) на кнопке  в другом модуле
 
     useEffect(() => {
-        axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=${maxResult}&q=${props.inputValueToUrl}&key=AIzaSyBJNM6bUpw6P3lhIWkUzrZmYekhbSO2o_8`)
-        .then((res:any) => {
-          const video:Ivideos = res.data;
-          setVideos(video)
-          console.log('обновляется')
-        })  
-        .then(res => {console.log(`данные получены`)})
-    },[props.toggle]) 
-    
-// localStorage.clear()
+      if(props.isLoaded === true){
+        axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=${props.inputValueToUrl}&key=AIzaSyBJNM6bUpw6P3lhIWkUzrZmYekhbSO2o_8`)
+          .then((res:any) => {
+            props.setIsLoaded(false)
+            const video:Ivideos = res.data;
+            setVideos(video)
+            localStorage.setItem('responseData',JSON.stringify(res.data))
+            console.log(`обновляется `)
+          })}
+           else if(props.isLoaded === false)
+            { 
+            setVideos(JSON.parse(localStorage.getItem('responseData') as any))
+            console.log(`не обновляется `)
+          }
+        },[props.toggle])
+
+        // в блоке елсе можно отправлять запрос на популярные видосы
+        // https://youtube.googleapis.com/youtube/v3/videos?chart=mostPopular&key=[YOUR_API_KEY] попробовать
+
+  //  useEffect(() => {
+  //     axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=${props.inputValueToUrl}&key=AIzaSyBJNM6bUpw6P3lhIWkUzrZmYekhbSO2o_8`)
+  //       .then((res:any) => {
+  //         const video:Ivideos = res.data;
+  //         setVideos(video)
+  //         console.log('обновляется')
+  //       })  
+  //     },[props.toggle]) 
+        
   return (
     <div className={cl.videosWrapper}>
       <div className={cl.searchResult}>
@@ -41,9 +61,30 @@ export default function SearchPage(props:any) {
               <ChangeViev 
               viev={'searchViev'}
               className={cl.changeVievIcons}
-              Component={<VideosSearchPage videos={videos}/>
+              Component={
+                <VideosSearchPage videos={videos}/>
               }/>
+              {/* !isLoaded
+              ?<div>идет загрузка...</div> */}
       </div>
     </div>
   )
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export default SearchPage

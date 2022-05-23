@@ -22,7 +22,7 @@
   },
   "include": [
     "src",
-    "styles.module.css.d.ts",
-    "svg.d.ts"
+    "svg.d.ts",
+    "ScssModules.d.ts"
   ]
 }

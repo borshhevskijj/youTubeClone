@@ -20,7 +20,7 @@ export interface IvideoItems{
       kind:" youtube#searchResult"
       etag: string
       id: {
-        kind: string
+        kind?: string
         videoId: string
       }
       snippet: {
