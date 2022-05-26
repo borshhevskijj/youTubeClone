@@ -1,13 +1,9 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit"
 // import { composeWithDevTools } from "@reduxjs/toolkit/dist/devtoolsExtension";
-import AddToSlice from './SearchSlice'
-import favoritesSlice from "./favoritesSlice";
+import AddToSlice from "./SearchSlice"
 
-
-export default configureStore ({
-    reducer:{
-        AddToSlice,
-        favoritesSlice,
-    },
-});
-// export const store = createStore (rootReducer,composeWithDevTools())
+export default configureStore({
+  reducer: {
+    AddToSlice,
+  },
+})

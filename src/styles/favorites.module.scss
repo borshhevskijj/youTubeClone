@@ -1,4 +1,4 @@
-@import 'variables';
+@import "variables";
 
 // .wrapper{
 //     width: 100%;
@@ -6,9 +6,9 @@
 // }
 
 .changeVievIcons button {
-    border: none;
-    margin: 15px 0 25px 0;
-    background-color: inherit;
+  border: none;
+  margin: 15px 0 25px 0;
+  background-color: inherit;
 }
 
 // .videosWrapper{
@@ -16,65 +16,62 @@
 //     flex-direction: column;
 // }
 
-
 // .iFrameYouTubeVideo iframe{
 //     width: 100%;
 //     height: 100%;
 // }
 
-
-.iFrameYouTubeVideoWrapper{  
-    display: grid;
-    gap: 100px 30px;
-      .iFrameYouTubeVideo{
-      position: relative;
-      bottom: 0;
-      left: 0;
-      text-align: left;
-        iframe{ 
-          width: 100%;
-          height: 100%;
-        }
+.iFrameYouTubeVideoWrapper {
+  display: grid;
+  gap: 100px 30px;
+  .iFrameYouTubeVideo {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    text-align: left;
+    iframe {
+      width: 100%;
+      height: 100%;
+    }
+  }
 }
+
+.btn {
+  align-items: center;
+  appearance: button;
+  background-color: $primaryColor;
+  border-radius: 5px;
+  border-style: none;
+  box-shadow: rgba(255, 255, 255, 0.26) 0 1px 2px inset;
+  box-sizing: border-box;
+  color: $white;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  flex-shrink: 0;
+  /* font-family: "RM Neue",sans-serif; */
+  line-height: 1.15;
+  margin: 0;
+  padding: 10px 21px;
+  text-align: center;
+  text-transform: none;
+  transition: color 0.2s ease-in-out, background 0.2s ease-in-out,
+    opacity 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+.btn:hover {
+  // background-color:#2155CD;
+  background-color: $darkenPrimaryColor;
 }
 
-
-  .btn {
-    align-items: center;
-    appearance: button;
-    background-color: $primaryColor;  
-    border-radius: 5px;
-    border-style: none;
-    box-shadow: rgba(255, 255, 255, 0.26) 0 1px 2px inset;
-    box-sizing: border-box;
-    color: $white;
-    cursor: pointer;
-    display: flex;
-    flex-direction: row;
-    flex-shrink: 0;
-    /* font-family: "RM Neue",sans-serif; */
-    line-height: 1.15;
-    margin: 0;
-    padding: 10px 21px;
-    text-align: center;
-    text-transform: none;
-    transition: color .2s ease-in-out,background .2s ease-in-out,opacity .2s ease-in-out,box-shadow .2s ease-in-out;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    
+@media (max-width: 650px) {
+  .changeVievIcons button {
+    display: none;
   }
-  .btn:hover {
-    // background-color:#2155CD;  
-    background-color: $darkenPrimaryColor;  
+  .iFrameYouTubeVideoWrapper {
+    grid-template-columns: repeat(auto-fit, minmax(245px, 1fr)) !important;
+    grid-auto-rows: minmax(250px, 250px) !important;
   }
-
-  @media (max-width:650px) {
-      .changeVievIcons button{
-          display: none;
-      }
-      .iFrameYouTubeVideoWrapper{
-        grid-template-columns: repeat(auto-fit, minmax(245px, 1fr))!important;
-        grid-auto-rows: minmax(250px, 250px)!important;
-      }
-  }
+}

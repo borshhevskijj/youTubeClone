@@ -1,33 +1,16 @@
-import {createSlice} from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit"
 
+const AddToSlice = createSlice({
+  name: "addAny",
+  initialState: {
+    inputValue: "",
+  },
 
-
-// addLastSearchRequest 
-// addMoreVideos
-// addToFavorites
-// handToggle
-
-const AddToSlice = createSlice({ 
-    name: 'addAny',
-    initialState:{
-        inputValue:''
+  reducers: {
+    addToFavorites(state, action) {
+      localStorage.setItem(action.payload, action.payload)
     },
-
-
-    reducers:{
-        addLastSearchRequest(state, action){
-            if(localStorage.getItem('lastSearchRequest') === ''){
-                localStorage.removeItem('lastSearchRequest')
-            }
-                localStorage.setItem('lastSearchRequest',action.payload)
-        },
-
-        addToFavorites(state, action){
-            localStorage.setItem(action.payload ,action.payload) 
-        },
-
-    
-    }
-}) 
-export const { addLastSearchRequest, addToFavorites} = AddToSlice.actions;
-export default AddToSlice.reducer;
+  },
+})
+export const { addToFavorites } = AddToSlice.actions
+export default AddToSlice.reducer

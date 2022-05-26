@@ -1,31 +1,31 @@
+$primaryColor: #1390e5;
+$darkenPrimaryColor: darken($primaryColor, 10%);
 
-$primaryColor:#1390E5;
-$darkenPrimaryColor:darken($primaryColor,10%);
+$white: #ffffff;
+$textColor: #1717194d;
 
-$white:#FFFFFF;
-$textColor:#1717194D;
-
-%buttons{
-    margin-top: 10px;
-    align-items: center;
-    appearance: button;
-    background-color: #2F8F9D;  
-    // background-color: red;  
-    border-radius: 5px;
-    border-style: none;
-    box-shadow: rgba(255, 255, 255, 0.26) 0 1px 2px inset;
-    box-sizing: border-box;
-    color: $white;
-    cursor: pointer;
-    display: flex;
-    flex-direction: row;
-    flex-shrink: 0;
-    line-height: 1.15;
-    padding: 10px 21px;
-    text-align: center;
-    text-transform: none;
-    transition: color .2s ease-in-out,background .2s ease-in-out,opacity .2s ease-in-out,box-shadow .2s ease-in-out;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
+%buttons {
+  margin-top: 10px;
+  align-items: center;
+  appearance: button;
+  background-color: #2f8f9d;
+  // background-color: red;
+  border-radius: 5px;
+  border-style: none;
+  box-shadow: rgba(255, 255, 255, 0.26) 0 1px 2px inset;
+  box-sizing: border-box;
+  color: $white;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  flex-shrink: 0;
+  line-height: 1.15;
+  padding: 10px 21px;
+  text-align: center;
+  text-transform: none;
+  transition: color 0.2s ease-in-out, background 0.2s ease-in-out,
+    opacity 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
 }

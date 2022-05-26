@@ -40,7 +40,7 @@ export const jsonVideosResult = {
         title: "The Weeknd - Save Your Tears (Official Music Video)", // это 1
         description: "Official music video by The Weeknd performing \"Save Your Tears\"– 'After Hours' available everywhere now: ...", //это 3
         thumbnails: {
-          default :{
+          default: {
             url: "https://i.ytimg.com/vi/XXYlFuWEuKI/default.jpg",
             width: 120,
             height: 90
