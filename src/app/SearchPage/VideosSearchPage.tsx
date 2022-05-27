@@ -5,29 +5,29 @@ import cl from '../../styles/search.module.scss'
 import { IvideoItems } from '../../interfaces/searchResult'
 import { handToggle } from '../Search'
 import Like from '../svg/Like'
+import { IvideosSearchPageProps } from '../../interfaces/searchPageProps'
 
-
-export default function VideosSearchPage(props: any) {
+// export default function VideosSearchPage(props: any) {
+export default function VideosSearchPage({ videos }: IvideosSearchPageProps) {
     const dispatch = useDispatch();
-    const [likedVideo, setLikedVideo] = useState<string[]>([])
+    const [likedVideo, setLikedVideo] = useState<IvideoItems['id']['videoId'][]>([])
     const [toggle, setToggle] = useState(false)
 
     useEffect(() => {
         const likedVideos = () => {
-            return props.videos?.items
+            return videos?.items
                 .map((item: IvideoItems) => item.id.videoId)
-                .filter((videoId: any) => videoId !== undefined && `https://www.youtube.com/embed/${videoId}` === localStorage.getItem(`https://www.youtube.com/embed/${videoId}`))
+                .filter((videoId: IvideoItems['id']['videoId']) => videoId !== undefined && `https://www.youtube.com/embed/${videoId}` === localStorage.getItem(`https://www.youtube.com/embed/${videoId}`))
         }
         setLikedVideo(likedVideos)
 
-    }, [toggle, setLikedVideo, props.videos])
+    }, [toggle, setLikedVideo, videos])
 
     return (
         <>
             {
-                props.videos
-                    ? props.videos.items.map((item: IvideoItems) =>
-                        // <div key={item.id.videoId}  
+                videos
+                    ? videos.items.map((item: IvideoItems) =>
                         <div key={item.id.videoId}
                             className={cl.iFrameYouTubeVideo}>
                             <iframe src={`https://www.youtube.com/embed/${item.id.videoId}`} title={item.snippet.title} frameBorder="0" allowFullScreen></iframe>

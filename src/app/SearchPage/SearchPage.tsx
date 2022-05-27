@@ -1,47 +1,60 @@
 
-import React, { useEffect, useState } from 'react'
+import React, { ReactText, useEffect, useState } from 'react'
 import cl from '../../styles/search.module.scss'
 import axios from "axios";
 import { Ivideos } from '../../interfaces/searchResult';
 import VideosSearchPage from './VideosSearchPage';
 import ChangeViev from '../UI/ChangeViev';
+import { IsearchPageProps } from './../../interfaces/searchPageProps'
 
-
-const SearchPage = (props: any) => {
+// const SearchPage = (props: any) => {
+const SearchPage: React.FC<IsearchPageProps> = ({
+  isLoaded,
+  setIsLoaded,
+  toggle,
+  debouncedInput,
+  inputValueToUrl,
+}) => {
   const [videos, setVideos] = useState<Ivideos | undefined>() // массив с видео 
 
   useEffect(() => {
-    if (props.isLoaded === true) {
-      axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${props.inputValueToUrl}&key=AIzaSyBJNM6bUpw6P3lhIWkUzrZmYekhbSO2o_8`)
+    if (isLoaded === true) {
+      axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${inputValueToUrl}&key=AIzaSyBJNM6bUpw6P3lhIWkUzrZmYekhbSO2o_8`)
         .then((res: any) => {
-          props.setIsLoaded(false)
+          setIsLoaded(false)
           const video: Ivideos = res.data;
           setVideos(video)
           localStorage.setItem('responseData', JSON.stringify(res.data))
-          console.log(`обновляется`)
+          console.log(`обновляется 1`)
         })
     }
-    else if (props.isLoaded === false && Object.keys(localStorage).includes('responseData')) {
-      setVideos(JSON.parse(localStorage.getItem('responseData') as any))
+
+    else if (isLoaded === false && Object.keys(localStorage).includes('responseData')) {
+      setVideos(JSON.parse(localStorage.getItem('responseData')!))
+      console.log(`обновляется 2`)
+
     }
-    else if (props.isLoaded === false && Object.keys(localStorage).includes('responseData') === false) {
-      axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=популярное&key=AIzaSyBJNM6bUpw6P3lhIWkUzrZmYekhbSO2o_8`)
+    else if (isLoaded === false && Object.keys(localStorage).includes('responseData') === false) {
+      axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=memes&key=AIzaSyBJNM6bUpw6P3lhIWkUzrZmYekhbSO2o_8`)
         .then((res: any) => {
           setVideos(res.data)
+          console.log(`обновляется 3`)
+
         })
     }
-  }, [props.toggle])
+  }, [toggle])
+
   return (
     <div className={cl.videosWrapper}>
       <div className={cl.searchResult}>
-        <p> Видео по запросу <strong>`{props.debouncedInput}`</strong> <span>{videos?.pageInfo.totalResults}</span></p>
+        <p> Видео по запросу <strong>` {debouncedInput} `</strong> <span>{videos?.pageInfo.totalResults}</span></p>
         <ChangeViev
           viev={'searchViev'}
           className={cl.changeVievIcons}
           Component={
 
-            !props.isLoaded
-              ? <VideosSearchPage videos={videos} />
+            !isLoaded
+              ? <VideosSearchPage videos={videos!} />
               : <div>идет загрузка...</div>
           } />
       </div>

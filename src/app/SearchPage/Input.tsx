@@ -7,31 +7,37 @@ import SearchPage from './SearchPage';
 
 
 export default function Input() {
-  const lastSearchRequest = localStorage.getItem('lastSearchRequest') || 'популярное'
-
-  const [inputValue, setInputValue] = useState<string>(lastSearchRequest)
-  const [toggle, setToggle] = useState<boolean>(JSON.parse(localStorage.getItem('toggle')!) || false)
+  // const lastSearchRequest = localStorage.getItem('lastSearchRequest') || 'популярное'
+  const [inputValue, setInputValue] = useState<string>('')
+  const [toggle, setToggle] = useState<boolean | undefined>()
   const debouncedInput = useDebounce(inputValue, 500)// выводит текст с задержкой
   const inputValueToUrl = (inputValue).replace(/ /gim, '%20') // для url адреса убирает пробелы и заменяет их символом
+  const [isLoaded, setIsLoaded] = useState<boolean>(false) // контролирует запросы к API
 
-  const [isLoaded, setIsLoaded] = useState(false)
 
 
 
   useEffect(() => {
-    setToggle(JSON.parse(localStorage.getItem('toggle')!))
+    const LStoggle: boolean = JSON.parse(localStorage.getItem('toggle')!) || false
+    setToggle(LStoggle)
+
+    const lastSearchRequest = localStorage.getItem('lastSearchRequest') || 'memes'
+    setInputValue(lastSearchRequest)
   }, [])
+
   useEffect(() => {
     localStorage.setItem('toggle', JSON.stringify(toggle))
   }, [toggle])
 
 
   const setStatesAndLastSearchRequest = () => {
-    handToggle(setToggle, toggle)
-    setIsLoaded(true)
-    localStorage.setItem('lastSearchRequest', inputValue) // устанавливаем последний запрос
+    handToggle(setToggle as React.Dispatch<React.SetStateAction<boolean>>, toggle!) // следит за нажатием на кнопку "найти"
+    setIsLoaded(true)  // состояние загрузки видео
+    localStorage.setItem('lastSearchRequest', inputValue)
   }
 
+
+  // localStorage.removeItem('lastSearchRequest')
   return (
     <>
       <div className={cl.search}>
@@ -50,7 +56,7 @@ export default function Input() {
       <SearchPage
         setIsLoaded={setIsLoaded}
         isLoaded={isLoaded}
-        toggle={toggle}
+        toggle={toggle!}
         inputValueToUrl={inputValueToUrl}
         debouncedInput={debouncedInput}
       />
