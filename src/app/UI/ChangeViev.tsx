@@ -9,9 +9,8 @@ import Grid from '../svg/Grid'
 const [videosListCol, videosGridCol] = ['repeat(1,minmax(300px,1fr))', 'repeat(auto-fit,minmax(245px,1fr))'] //ширину
 const [videosListRow, videosGridRow] = ['minmax(550px,250px)', 'minmax(250px,250px)'] //высоту
 
-// grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
 export default function ChangeViev(props: any) {
-  const [viev, setViev] = useState<boolean>(JSON.parse(localStorage.getItem(`${props.viev}`) as string) || false) // для изменения списка с видео
+  const [viev, setViev] = useState<boolean>(JSON.parse(localStorage.getItem(`${props.viev}`) as string) || false)
 
   useEffect(() => {
     setViev(JSON.parse(localStorage.getItem(`${props.viev}`) as string))
@@ -42,10 +41,3 @@ export default function ChangeViev(props: any) {
     </div>
   )
 }
-
-// useEffect(()=>{
-//   setViev(JSON.parse(localStorage.getItem('favoritesViev') as string))
-// },[])
-// useEffect(()=>{
-//   localStorage.setItem('favoritesViev',JSON.stringify(viev))
-// },[viev])

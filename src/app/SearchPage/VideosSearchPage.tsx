@@ -7,7 +7,6 @@ import { handToggle } from '../Search'
 import Like from '../svg/Like'
 import { IvideosSearchPageProps } from '../../interfaces/searchPageProps'
 
-// export default function VideosSearchPage(props: any) {
 export default function VideosSearchPage({ videos }: IvideosSearchPageProps) {
     const dispatch = useDispatch();
     const [likedVideo, setLikedVideo] = useState<IvideoItems['id']['videoId'][]>([])
@@ -21,20 +20,23 @@ export default function VideosSearchPage({ videos }: IvideosSearchPageProps) {
         }
         setLikedVideo(likedVideos)
 
-    }, [toggle, setLikedVideo, videos])
+    }, [toggle, videos])
+
+
+
 
     return (
         <>
             {
                 videos
-                    ? videos.items.map((item: IvideoItems) =>
-                        <div key={item.id.videoId}
+                    ? videos.items.map((item: IvideoItems, index: number) =>
+                        <div key={index}
                             className={cl.iFrameYouTubeVideo}>
-                            <iframe src={`https://www.youtube.com/embed/${item.id.videoId}`} title={item.snippet.title} frameBorder="0" allowFullScreen></iframe>
+                            <iframe src={`https://www.youtube.com/embed/${item.id.videoId}`} loading='lazy' title={item.snippet.title} frameBorder="0" allowFullScreen></iframe>
 
                             <div className={cl.infoWrapper}>
                                 <div className={cl.info}>
-                                    <p style={{ color: 'black' }}>{item.snippet.title.replace(/&#39;/, "'")}</p>
+                                    <p style={{ color: 'black', maxHeight: '60px', textOverflow: 'ellipsis' }}>{item.snippet.title}</p>
                                     <p >{item.snippet.channelTitle}</p>
                                 </div>
 

@@ -7,19 +7,18 @@ import SearchPage from './SearchPage';
 
 
 export default function Input() {
-  // const lastSearchRequest = localStorage.getItem('lastSearchRequest') || 'популярное'
   const [inputValue, setInputValue] = useState<string>('')
   const [toggle, setToggle] = useState<boolean | undefined>()
+  const [isLoaded, setIsLoaded] = useState<boolean>(false) // контролирует запросы к API
   const debouncedInput = useDebounce(inputValue, 500)// выводит текст с задержкой
   const inputValueToUrl = (inputValue).replace(/ /gim, '%20') // для url адреса убирает пробелы и заменяет их символом
-  const [isLoaded, setIsLoaded] = useState<boolean>(false) // контролирует запросы к API
 
 
 
 
   useEffect(() => {
-    const LStoggle: boolean = JSON.parse(localStorage.getItem('toggle')!) || false
-    setToggle(LStoggle)
+    const toggleInLS: boolean = JSON.parse(localStorage.getItem('toggle')!) || false
+    setToggle(toggleInLS)
 
     const lastSearchRequest = localStorage.getItem('lastSearchRequest') || 'memes'
     setInputValue(lastSearchRequest)
@@ -63,3 +62,4 @@ export default function Input() {
     </>
   )
 }
+

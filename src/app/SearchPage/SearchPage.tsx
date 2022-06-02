@@ -1,5 +1,5 @@
 
-import React, { ReactText, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import cl from '../../styles/search.module.scss'
 import axios from "axios";
 import { Ivideos } from '../../interfaces/searchResult';
@@ -7,8 +7,7 @@ import VideosSearchPage from './VideosSearchPage';
 import ChangeViev from '../UI/ChangeViev';
 import { IsearchPageProps } from './../../interfaces/searchPageProps'
 
-// const SearchPage = (props: any) => {
-const SearchPage: React.FC<IsearchPageProps> = ({
+export const SearchPage: React.FC<IsearchPageProps> = ({
   isLoaded,
   setIsLoaded,
   toggle,
@@ -19,7 +18,7 @@ const SearchPage: React.FC<IsearchPageProps> = ({
 
   useEffect(() => {
     if (isLoaded === true) {
-      axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${inputValueToUrl}&key=AIzaSyBJNM6bUpw6P3lhIWkUzrZmYekhbSO2o_8`)
+      axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&q=${inputValueToUrl}&key=AIzaSyBJNM6bUpw6P3lhIWkUzrZmYekhbSO2o_8`)
         .then((res: any) => {
           setIsLoaded(false)
           const video: Ivideos = res.data;
@@ -27,22 +26,25 @@ const SearchPage: React.FC<IsearchPageProps> = ({
           localStorage.setItem('responseData', JSON.stringify(res.data))
           console.log(`обновляется 1`)
         })
+        .catch((e) => {
+          console.log(e);
+          alert(`что-то пошло не так, ошибка ${e}`)
+        })
     }
 
     else if (isLoaded === false && Object.keys(localStorage).includes('responseData')) {
       setVideos(JSON.parse(localStorage.getItem('responseData')!))
       console.log(`обновляется 2`)
-
     }
     else if (isLoaded === false && Object.keys(localStorage).includes('responseData') === false) {
       axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=memes&key=AIzaSyBJNM6bUpw6P3lhIWkUzrZmYekhbSO2o_8`)
         .then((res: any) => {
           setVideos(res.data)
           console.log(`обновляется 3`)
-
         })
     }
   }, [toggle])
+
 
   return (
     <div className={cl.videosWrapper}>

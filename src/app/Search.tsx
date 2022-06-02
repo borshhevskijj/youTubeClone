@@ -1,7 +1,5 @@
 import React from 'react'
-// import  from 'react'
 import cl from '../styles/search.module.scss'
-// api 'key=AIzaSyD5EbfHvULtLR2bYf1BdbiOjz6zU52hILw'
 import Input from './SearchPage/Input';
 
 

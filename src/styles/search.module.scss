@@ -79,10 +79,14 @@
   justify-content: space-between;
   align-items: flex-start;
   padding-top: 5px;
+  button:hover {
+    cursor: pointer;
+  }
 }
+
 .info {
   overflow: hidden;
-  & p {
+  p {
     overflow: hidden;
     text-overflow: ellipsis;
   }
