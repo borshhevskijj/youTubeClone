@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 const AddToSlice = createSlice({
-  name: "addAny",
+  name: "add",
   initialState: {
     inputValue: "",
   },

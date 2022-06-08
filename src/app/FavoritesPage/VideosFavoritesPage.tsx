@@ -11,7 +11,7 @@ export default function VideosFavoritesPage({ favorites, DeleteVideo }: IVideosF
             style={{ marginBottom: '40px' }}
             key={favorite}
             className={cl.iFrameYouTubeVideo}>
-            <iframe src={favorite} title='any' frameBorder="0" allowFullScreen></iframe>
+            <iframe src={favorite} title='any' loading='lazy' frameBorder="0" allowFullScreen></iframe>
             <button style={{ marginTop: '20px' }} className={cl.btn} onClick={() => DeleteVideo(favorite)}>Удалить</button>
           </div>
         )

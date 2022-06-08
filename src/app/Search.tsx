@@ -6,7 +6,7 @@ import Input from './SearchPage/Input';
 if (localStorage.getItem('lastSearchRequest') === '') {
   localStorage.removeItem('lastSearchRequest')
 }
-export const handToggle = (setFn: React.Dispatch<React.SetStateAction<boolean>>, variable: boolean) => { // переключатель состояний
+export const handToggle = (setFn: React.Dispatch<React.SetStateAction<boolean>>, variable: boolean) => {
   setFn(!variable)
 }
 

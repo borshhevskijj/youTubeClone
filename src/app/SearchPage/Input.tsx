@@ -11,9 +11,7 @@ export default function Input() {
   const [toggle, setToggle] = useState<boolean | undefined>()
   const [isLoaded, setIsLoaded] = useState<boolean>(false) // контролирует запросы к API
   const debouncedInput = useDebounce(inputValue, 500)// выводит текст с задержкой
-  const inputValueToUrl = (inputValue).replace(/ /gim, '%20') // для url адреса убирает пробелы и заменяет их символом
-
-
+  const inputValueToUrl = (inputValue).replace(/ /gim, '%20') //
 
 
   useEffect(() => {
@@ -28,15 +26,18 @@ export default function Input() {
     localStorage.setItem('toggle', JSON.stringify(toggle))
   }, [toggle])
 
-
   const setStatesAndLastSearchRequest = () => {
     handToggle(setToggle as React.Dispatch<React.SetStateAction<boolean>>, toggle!) // следит за нажатием на кнопку "найти"
     setIsLoaded(true)  // состояние загрузки видео
     localStorage.setItem('lastSearchRequest', inputValue)
   }
 
+  const onPressEnterOnInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      setStatesAndLastSearchRequest()
+    }
+  }
 
-  // localStorage.removeItem('lastSearchRequest')
   return (
     <>
       <div className={cl.search}>
@@ -48,6 +49,7 @@ export default function Input() {
             spellCheck={false}
             value={inputValue}
             onChange={e => setInputValue(e.target.value)}
+            onKeyDown={e => onPressEnterOnInput(e)}
           />
           <button onClick={() => setStatesAndLastSearchRequest()} className={cl.searchButton}>НАЙТИ</button>
         </div>
