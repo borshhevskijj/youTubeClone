@@ -49,7 +49,6 @@
   display: flex;
   flex-direction: row;
   flex-shrink: 0;
-  /* font-family: "RM Neue",sans-serif; */
   line-height: 1.15;
   margin: 0;
   padding: 10px 21px;
@@ -62,16 +61,15 @@
   touch-action: manipulation;
 }
 .btn:hover {
-  // background-color:#2155CD;
   background-color: $darkenPrimaryColor;
 }
 
-@media (max-width: 650px) {
+@media (max-width: 789px) {
+  .iFrameYouTubeVideoWrapper {
+    grid-template-columns: 1fr !important;
+    grid-auto-rows: 220px !important;
+  }
   .changeVievIcons button {
     display: none;
-  }
-  .iFrameYouTubeVideoWrapper {
-    grid-template-columns: repeat(auto-fit, minmax(245px, 1fr)) !important;
-    grid-auto-rows: minmax(250px, 250px) !important;
   }
 }

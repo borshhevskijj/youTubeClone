@@ -28,18 +28,18 @@ export interface IvideoItems {
     thumbnails: {
       default: {
         url: string
-        width: number
-        height: number
+        width?: number
+        height?: number
       }
       medium: {
         url: string
-        width: number
-        height: number
+        width?: number
+        height?: number
       }
       high: {
         url: string
-        width: number
-        height: number
+        width?: number
+        height?: number
       }
     }
     channelTitle: string

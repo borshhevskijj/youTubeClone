@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react'
-// import cl from 'C:/you-tube-react-redux-ts/src/styles/navBar.module.scss'
 import cl from '../../styles/favorites.module.scss'
 import { handToggle } from '../Search'
-// import content from './../svg/grid.svg'
 import List from '../svg/List'
 import Grid from '../svg/Grid'
 
-const [videosListCol, videosGridCol] = ['repeat(1,minmax(300px,1fr))', 'repeat(auto-fit,minmax(245px,1fr))'] //ширину
-const [videosListRow, videosGridRow] = ['minmax(550px,250px)', 'minmax(250px,250px)'] //высоту
+const [videosListCol, videosGridCol] = ['1fr', 'repeat(auto-fit,minmax(300px, 1fr))'] //gridTemplateColumns
+const [videosListRow, videosGridRow] = ['80vh', 'minmax(180px,230px)'] //gridAutoRows
+
 
 export default function ChangeViev(props: any) {
   const [viev, setViev] = useState<boolean>(JSON.parse(localStorage.getItem(`${props.viev}`) as string) || false)
@@ -15,6 +14,7 @@ export default function ChangeViev(props: any) {
   useEffect(() => {
     setViev(JSON.parse(localStorage.getItem(`${props.viev}`) as string))
   }, [])
+
   useEffect(() => {
     localStorage.setItem(`${props.viev}`, JSON.stringify(viev))
   }, [viev])
@@ -41,3 +41,5 @@ export default function ChangeViev(props: any) {
     </div>
   )
 }
+
+
