@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import { addToFavorites } from '../../store/SearchSlice'
+import { showLength } from '../../store/sliceVideosSlice'
 import cl from '../../styles/search.module.scss'
 import { IvideoItems } from '../../interfaces/searchResult'
 import { handToggle } from '../Search'
 import Like from '../svg/Like'
 import { IvideosSearchPageProps } from '../../interfaces/searchPageProps'
-import ReactDOM from 'react-dom'
 
 
 export default function VideosSearchPage({ videos }: IvideosSearchPageProps) {
@@ -23,13 +23,6 @@ export default function VideosSearchPage({ videos }: IvideosSearchPageProps) {
         setLikedVideo(likedVideos)
 
     }, [toggle, videos])
-    // localStorage.clear()
-    // const mapped = videos?.items.map((video: IvideoItems) => delete video.snippet.thumbnails.default.width)
-    // console.log(mapped);
-
-    // console.log(videos.items);
-
-    // localStorage.clear()
 
     //#region infinityScroll
     const [slice, setSlice] = useState(10)
@@ -38,11 +31,22 @@ export default function VideosSearchPage({ videos }: IvideosSearchPageProps) {
 
     const isBottom = (e: any) => e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight)
 
-    const scrollHandler = (e: Event) => { // если до конца страницы остается 100 px то  добавляет еще 10 видео в срез
 
-        if ((isBottom(e) < 100)) {
-            console.log('дошел до края');
-            setSlice(slice + 10)
+    const [flag, setFlag] = useState(false)
+
+    const scrollHandler = (e: Event) => { // если до конца страницы остается 100 px то  добавляет еще 10 видео в срез
+        try {
+            if ((isBottom(e) < 100)) {
+                console.log('дошел до края');
+                setSlice(slice + 10)
+                dispatch(showLength(videoItemsSlice.length))
+                setFlag(true)
+            }
+        } catch (error) {
+            console.log(error);
+        }
+        finally {
+            setFlag(false)
         }
     }
 
@@ -91,6 +95,7 @@ export default function VideosSearchPage({ videos }: IvideosSearchPageProps) {
         iframe.setAttribute('frameBorder', '0')
         iframe.setAttribute('allowFullScreen', '1')
         iframe.setAttribute('allow', 'autoplay')
+        iframe.setAttribute('allow', 'autoplay')
 
         e.currentTarget.parentElement?.insertBefore(iframe, e.currentTarget)
         e.currentTarget?.parentElement?.removeChild(e.currentTarget)
@@ -102,7 +107,6 @@ export default function VideosSearchPage({ videos }: IvideosSearchPageProps) {
 
     return (
         <>
-
             {
                 videos
                     ? videoItemsSlice.map((item: IvideoItems, index: number) =>
@@ -112,11 +116,11 @@ export default function VideosSearchPage({ videos }: IvideosSearchPageProps) {
                                 src={item.snippet.thumbnails?.medium.url}
                                 onClick={e => createIframe(item, e)}
                                 loading='lazy'
-                                style={{ width: '100%', height: '100%' }}
                                 alt={item.snippet.title} />
 
                             <div className={cl.infoWrapper}>
                                 <div className={cl.info}>
+                                    <p>{index + 1}</p>
                                     <p style={{ color: 'black' }}>{trancateString(item?.snippet.title, 51)} </p>
                                     <p>{trancateString(item?.snippet.channelTitle, 40)}</p>
                                 </div>

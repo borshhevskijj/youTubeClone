@@ -21,7 +21,7 @@
 }
 
 .searchResult {
-  padding: 1.2em 0 1.9em 0;
+  padding-top: 1.2em;
   p {
     font-size: 0.7em;
   }
@@ -97,6 +97,10 @@
   bottom: 0;
   left: 0;
   iframe {
+    width: 100%;
+    min-height: 100%;
+  }
+  img {
     width: 100%;
     min-height: 100%;
   }
