@@ -8,11 +8,10 @@ import SearchPage from './SearchPage';
 
 export default function Input() {
   const [inputValue, setInputValue] = useState<string>('')
-  const [toggle, setToggle] = useState<boolean | undefined>()
+  const [toggle, setToggle] = useState<boolean>(false)
   const [isLoaded, setIsLoaded] = useState<boolean>(false) // контролирует запросы к API
   const debouncedInput = useDebounce(inputValue, 500)// выводит текст с задержкой
   const inputValueToUrl = (inputValue).replace(/ /gim, '%20') //
-
 
   useEffect(() => {
     const toggleInLS: boolean = JSON.parse(localStorage.getItem('toggle')!) || false

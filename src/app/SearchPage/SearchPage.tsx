@@ -23,7 +23,8 @@ export const SearchPage: React.FC<IsearchPageProps> = ({
   const videoSliceLength = useSelector((state: any) => state.videoSliceLength.videosSliceLength)
 
 
-  const youTubeAPIurl = (pageToken = '') => {
+
+  const setUrl = (pageToken = '') => {
     // &pageToken=
     if (pageToken) {
       return (
@@ -42,7 +43,7 @@ export const SearchPage: React.FC<IsearchPageProps> = ({
   //#region Get request 
   useEffect(() => {
     if (isLoaded === true) {
-      axios.get(youTubeAPIurl())
+      axios.get(setUrl())
         .then((res: any) => {
           setIsLoaded(false)
           const video: Ivideos = res.data;
@@ -65,8 +66,7 @@ export const SearchPage: React.FC<IsearchPageProps> = ({
     }
 
     else if (isLoaded === false && Object.keys(localStorage).includes('responseData') === false) {
-
-      axios.get(youTubeAPIurl())
+      axios.get(setUrl())
         .then((res: any) => {
           setVideos(res.data)
           setNextPageToken(res.data.nextPageToken)
@@ -101,20 +101,15 @@ export const SearchPage: React.FC<IsearchPageProps> = ({
 
   useEffect(() => {
     if (videoSliceLength === videos?.items.length) {
-      axios.get(youTubeAPIurl(nextPageToken))
+      axios.get(setUrl(nextPageToken))
         .then((res: any) => {
           setIsLoaded(false)
           const video: any = res.data;
           video.items = [...videos?.items as any, ...video.items]
-
           setVideos(video)
           setNextPageToken(video.nextPageToken)
           localStorage.setItem('responseData', JSON.stringify(video))
-
-
-          // localStorage.setItem('responseData', JSON.stringify(res.data))
           console.log(`обновляется 4`)
-
         })
         .catch((error) => {
           console.log(error);
@@ -138,17 +133,16 @@ export const SearchPage: React.FC<IsearchPageProps> = ({
               ? <VideosSearchPage videos={videos!} />
               : <div> идет загрузка... </div>
           } />
-        {/* {videoSliceLength === videos?.items.length */}
-
-
-        {!isLoaded
-          ? <div style={{ display: 'grid', placeContent: 'center', marginTop: 120 }}>
-            <span>
-              загрузка...
-            </span>
-          </div>
-          : false
+        {
+          !isLoaded
+            ? <div style={{ display: 'grid', placeContent: 'center', marginTop: 120 }}>
+              <span>
+                загрузка...
+              </span>
+            </div>
+            : false
         }
+
       </div>
     </div>
   )

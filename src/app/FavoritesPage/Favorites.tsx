@@ -9,10 +9,12 @@ export default function Favorites() {
 
   useEffect(() => {
     const getFavorites = Object.keys(localStorage)
-      .filter((favorite: string) => favorite !== undefined && favorite !== "lastSearchRequest" && favorite !== "toggle" && favorite !== "favoritesViev" && favorite !== "searchViev" && favorite !== "isLoaded" && favorite !== "responseData" && favorite !== 'videosSliceLength')
+      .filter((favorite: string) => favorite !== undefined && favorite !== "lastSearchRequest" && favorite !== "toggle" && favorite !== "favoritesViev" && favorite !== "searchViev" && favorite !== "responseData" && favorite !== 'videosSliceLength')
       .map(favorite => localStorage.getItem(favorite))
     setFavorites(getFavorites as string[])
   }, [])
+
+  // favorite !== "isLoaded"
 
   const DeleteVideo = (favorite: string) => {
     setFavorites(favorites.filter((video: string) => !favorite.includes(video)))
