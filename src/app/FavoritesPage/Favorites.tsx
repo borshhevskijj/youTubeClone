@@ -14,7 +14,6 @@ export default function Favorites() {
     setFavorites(getFavorites as string[])
   }, [])
 
-  // favorite !== "isLoaded"
 
   const DeleteVideo = (favorite: string) => {
     setFavorites(favorites.filter((video: string) => !favorite.includes(video)))

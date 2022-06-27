@@ -21,6 +21,7 @@ export default function Input() {
     setInputValue(lastSearchRequest)
   }, [])
 
+
   useEffect(() => {
     localStorage.setItem('toggle', JSON.stringify(toggle))
   }, [toggle])

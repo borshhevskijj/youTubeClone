@@ -89,16 +89,6 @@ export const SearchPage: React.FC<IsearchPageProps> = ({
   const [nextPageToken, setNextPageToken] = useState<string | undefined>()
 
 
-
-  console.log(videoSliceLength === videos?.items.length);
-  console.log(videoSliceLength);
-  console.log(videos?.items.length);
-
-
-  // localStorage.clear()
-
-
-
   useEffect(() => {
     if (videoSliceLength === videos?.items.length) {
       axios.get(setUrl(nextPageToken))

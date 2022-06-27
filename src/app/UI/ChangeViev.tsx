@@ -5,7 +5,7 @@ import List from '../svg/List'
 import Grid from '../svg/Grid'
 
 const [videosListCol, videosGridCol] = ['1fr', 'repeat(auto-fit,minmax(300px, 1fr))'] //gridTemplateColumns
-const [videosListRow, videosGridRow] = ['80vh', 'minmax(180px,230px)'] //gridAutoRows
+const [videosListRow, videosGridRow] = ['600px', 'minmax(180px,230px)'] //gridAutoRows
 
 
 export default function ChangeViev(props: any) {

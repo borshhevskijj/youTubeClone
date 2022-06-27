@@ -33,6 +33,10 @@
       width: 100%;
       height: 100%;
     }
+    img {
+      width: 100%;
+      height: 100%;
+    }
   }
 }
 
@@ -67,7 +71,8 @@
 @media (max-width: 789px) {
   .iFrameYouTubeVideoWrapper {
     grid-template-columns: 1fr !important;
-    grid-auto-rows: 220px !important;
+    grid-auto-rows: 225px !important;
+    min-height: 100%;
   }
   .changeVievIcons button {
     display: none;

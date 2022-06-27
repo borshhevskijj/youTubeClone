@@ -12,8 +12,6 @@ export interface Ivideos {
 
 export interface IvideoItems {
   [x: string]: any
-  // map(arg0: (item: any) => JSX.Element): import("react").ReactNode
-
   kind: "youtube#searchResult"
   etag: string
   id: {

@@ -115,12 +115,30 @@
 }
 
 .goToTop {
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0);
+  text-align: center;
   position: fixed;
-  bottom: 100px;
-  right: 100px;
-  z-index: 100000000000000;
-  border: 3px solid black;
-  padding: 15px 30px;
+  bottom: 30px;
+  right: 2.5%;
+  z-index: 10000000;
+  opacity: 1;
+  visibility: visible;
+  transition: background-color 0.5s, opacity 0.5s;
+  border-radius: 50%;
+  border: none;
+  height: 40px;
+  &:hover {
+    cursor: pointer;
+    -webkit-box-shadow: 1px 1px 9px 3px rgba($primaryColor, 0.2);
+    -moz-box-shadow: 1px 1px 9px 3px rgba($primaryColor, 0.2);
+    box-shadow: 1px 1px 9px 3px rgba($primaryColor, 0.2);
+  }
+}
+
+.goToTopHidden {
+  opacity: 0;
+  visibility: hidden;
 }
 
 @media (max-width: 789px) {
