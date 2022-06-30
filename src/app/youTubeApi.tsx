@@ -1,22 +1,4 @@
 
-// useEffect(() => {
-//   axios.get('https://jsonplaceholder.typicode.com/todos')
-//   .then(res => {
-//     const video:JsonPlhdr[] = res.data
-//     setVideos(video)
-//   })
-// }, [inputValue])
-
-//  const ytv=fetch('https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=the%20weekend&key=AIzaSyD5EbfHvULtLR2bYf1BdbiOjz6zU52hILw')
-//     .then(response => response.json())`
-//     .then(json => json.items)
-
-
-
-
-// json видосики
-
-
 export const jsonVideosResult = {
   kind: "youtube#searchListResponse",
   etag: "MmID9MbUNCkkDnpktgSqyf-5gqw",
@@ -32,13 +14,13 @@ export const jsonVideosResult = {
       etag: "8v0ogqTmzQWllcV1CCHuj-TxTWw",
       id: {
         kind: "youtube#video",
-        videoId: "XXYlFuWEuKI" // ЭТО ID видоса https://www.youtube.com/watch?v={XXYlFuWEuKI}
+        videoId: "XXYlFuWEuKI"
       },
       snippet: {
         publishedAt: "2021-01-05T17:00:12Z",
-        channelId: "UCF_fDSgPpBQuh1MsUTgIARQ", // это 2
-        title: "The Weeknd - Save Your Tears (Official Music Video)", // это 1
-        description: "Official music video by The Weeknd performing \"Save Your Tears\"– 'After Hours' available everywhere now: ...", //это 3
+        channelId: "UCF_fDSgPpBQuh1MsUTgIARQ",
+        title: "The Weeknd - Save Your Tears (Official Music Video)",
+        description: "Official music video by The Weeknd performing \"Save Your Tears\"– 'After Hours' available everywhere now: ...",
         thumbnails: {
           default: {
             url: "https://i.ytimg.com/vi/XXYlFuWEuKI/default.jpg",
@@ -367,13 +349,13 @@ export const jsonVideosResult = {
       etag: "8v0ogqTmzQWllcV1CCHuj-TxTWw",
       id: {
         kind: "youtube#video",
-        videoId: "XXYlFuWEuKI" // ЭТО ID видоса https://www.youtube.com/watch?v={XXYlFuWEuKI}
+        videoId: "XXYlFuWEuKI"
       },
       snippet: {
         publishedAt: "2021-01-05T17:00:12Z",
-        channelId: "UCF_fDSgPpBQuh1MsUTgIARQ", // это 2
-        title: "The Weeknd - Save Your Tears (Official Music Video)", // это 1
-        description: "Official music video by The Weeknd performing \"Save Your Tears\"– 'After Hours' available everywhere now: ...", //это 3
+        channelId: "UCF_fDSgPpBQuh1MsUTgIARQ",
+        title: "The Weeknd - Save Your Tears (Official Music Video)",
+        description: "Official music video by The Weeknd performing \"Save Your Tears\"– 'After Hours' available everywhere now: ...",
         thumbnails: {
           default: {
             url: "https://i.ytimg.com/vi/XXYlFuWEuKI/default.jpg",
@@ -702,13 +684,13 @@ export const jsonVideosResult = {
       etag: "8v0ogqTmzQWllcV1CCHuj-TxTWw",
       id: {
         kind: "youtube#video",
-        videoId: "XXYlFuWEuKI" // ЭТО ID видоса https://www.youtube.com/watch?v={XXYlFuWEuKI}
+        videoId: "XXYlFuWEuKI"
       },
       snippet: {
         publishedAt: "2021-01-05T17:00:12Z",
-        channelId: "UCF_fDSgPpBQuh1MsUTgIARQ", // это 2
-        title: "The Weeknd - Save Your Tears (Official Music Video)", // это 1
-        description: "Official music video by The Weeknd performing \"Save Your Tears\"– 'After Hours' available everywhere now: ...", //это 3
+        channelId: "UCF_fDSgPpBQuh1MsUTgIARQ",
+        title: "The Weeknd - Save Your Tears (Official Music Video)",
+        description: "Official music video by The Weeknd performing \"Save Your Tears\"– 'After Hours' available everywhere now: ...",
         thumbnails: {
           default: {
             url: "https://i.ytimg.com/vi/XXYlFuWEuKI/default.jpg",
@@ -1037,13 +1019,13 @@ export const jsonVideosResult = {
       etag: "8v0ogqTmzQWllcV1CCHuj-TxTWw",
       id: {
         kind: "youtube#video",
-        videoId: "XXYlFuWEuKI" // ЭТО ID видоса https://www.youtube.com/watch?v={XXYlFuWEuKI}
+        videoId: "XXYlFuWEuKI"
       },
       snippet: {
         publishedAt: "2021-01-05T17:00:12Z",
-        channelId: "UCF_fDSgPpBQuh1MsUTgIARQ", // это 2
-        title: "The Weeknd - Save Your Tears (Official Music Video)", // это 1
-        description: "Official music video by The Weeknd performing \"Save Your Tears\"– 'After Hours' available everywhere now: ...", //это 3
+        channelId: "UCF_fDSgPpBQuh1MsUTgIARQ",
+        title: "The Weeknd - Save Your Tears (Official Music Video)",
+        description: "Official music video by The Weeknd performing \"Save Your Tears\"– 'After Hours' available everywhere now: ...",
         thumbnails: {
           default: {
             url: "https://i.ytimg.com/vi/XXYlFuWEuKI/default.jpg",
@@ -1369,10 +1351,3 @@ export const jsonVideosResult = {
     }
   ]
 }
-// json видосики
-
-
-// https://www.youtube.com/watch?v=TE66McLMMEw гайд
-
-  //(1)key=AIzaSyD5EbfHvULtLR2bYf1BdbiOjz6zU52hILw`
-  //(2)key=AIzaSyDqQJB2oc4j5fZDY2K6BjorTRtP5TvGE9s`

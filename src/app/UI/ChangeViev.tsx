@@ -11,6 +11,10 @@ const [videosListRow, videosGridRow] = ['600px', 'minmax(180px,230px)'] //gridAu
 export default function ChangeViev(props: any) {
   const [viev, setViev] = useState<boolean>(JSON.parse(localStorage.getItem(`${props.viev}`) as string) || false)
 
+
+
+
+
   useEffect(() => {
     setViev(JSON.parse(localStorage.getItem(`${props.viev}`) as string))
   }, [])

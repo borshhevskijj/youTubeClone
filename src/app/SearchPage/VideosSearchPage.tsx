@@ -8,6 +8,7 @@ import { handToggle } from '../Search'
 import Like from '../svg/Like'
 import { IvideosSearchPageProps } from '../../interfaces/searchPageProps'
 import ToTopBtn from '../UI/ToTopBtn'
+import Iframe from '../Iframe'
 
 
 
@@ -17,20 +18,6 @@ const trancateString = (string: string, maxLength = 35) => {
     }
     return string
 }
-
-const createIframe = (item: IvideoItems, e: React.MouseEvent<HTMLElement>) => {
-    const iframe = document.createElement('iframe');
-    iframe.setAttribute('src', `https://www.youtube.com/embed/${item?.id.videoId}?autoplay=1&mute=0`)
-    iframe.setAttribute('title', item?.snippet.title)
-    iframe.setAttribute('frameBorder', '0')
-    iframe.setAttribute('allowFullScreen', '1')
-    iframe.setAttribute('allow', 'autoplay')
-
-    e.currentTarget.parentElement?.insertBefore(iframe, e.currentTarget)
-    e.currentTarget?.parentElement?.removeChild(e.currentTarget)
-}
-
-
 
 
 export default function VideosSearchPage({ videos }: IvideosSearchPageProps) {
@@ -51,16 +38,18 @@ export default function VideosSearchPage({ videos }: IvideosSearchPageProps) {
     }, [toggle, videos])
 
 
-    const isBottom = (e: any) => e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight)
 
     //#region infinityScroll
 
     const [slice, setSlice] = useState(10)
     const videoItemsSlice = videos?.items.slice(0, slice)
 
+
+
     const scrollHandler = (e: Event) => { // если до конца страницы остается 300 px то  добавляет еще 10 видео в срез
+        const isBottom = (e: any) => e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight)
+
         if ((isBottom(e) < 300)) {
-            console.log('дошел до края');
             setSlice(slice + 10)
             dispatch(showLength(videoItemsSlice.length))
         }
@@ -71,9 +60,7 @@ export default function VideosSearchPage({ videos }: IvideosSearchPageProps) {
         return () => {
             document.removeEventListener('scroll', scrollHandler)
         }
-    }, [isBottom])
-
-
+    })
     //#endregion
 
 
@@ -86,14 +73,8 @@ export default function VideosSearchPage({ videos }: IvideosSearchPageProps) {
                     ? videoItemsSlice.map((item: IvideoItems, index: number) =>
                         <div key={index} className={cl.iFrameYouTubeVideo}>
 
-                            <img
-                                src={item.snippet.thumbnails?.medium.url}
-                                onClick={e => createIframe(item, e)}
-                                loading='lazy'
-                                alt={item.snippet.title} />
 
-                            <div id='iframe'>
-                            </div>
+                            <Iframe item={item} />
 
                             <div className={cl.infoWrapper}>
                                 <div className={cl.info}>
